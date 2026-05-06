@@ -1,6 +1,7 @@
 // signin to home page
 
 const signinBtn = document.getElementById("signinBtn");
+
 signinBtn.addEventListener("click", (e) => {
     e.preventDefault();
     const username = document.getElementById("username").value;
@@ -15,3 +16,5 @@ signinBtn.addEventListener("click", (e) => {
         alert("Invalid username or password");
     }
 });
+
+
