@@ -70,10 +70,19 @@ const statusImg = {
     "open": "./assets/Open-Status.png",
     "closed": "./assets/Closed.png"
 }
-    
 
+
+// function for remove active
+const removeActive = () => {
+
+    document.getElementById("btn-all").classList.remove("active");
+    document.getElementById("btn-open").classList.remove("active");
+    document.getElementById("btn-closed").classList.remove("active");   
+    
+};
 
 // fetch all issue data
+let allIssuesData = [];
 
 const allIssues = () => {
 
@@ -81,7 +90,10 @@ const allIssues = () => {
 
     fetch(url)
     .then((respond) => respond.json())
-    .then((data) => displayIssues(data.data));
+    .then((data) => {
+        allIssuesData = data.data;
+        displayIssues(allIssuesData);
+    });
 
 };
 
@@ -128,6 +140,22 @@ const displayIssues = (issues) => {
     })
         
 }; 
+
+// display issues by status
+
+const filterIssues = (status) => {
+
+    removeActive();
+    const buttons = document.getElementById(`btn-${status}`)
+
+    buttons.classList.add("active");
+    if(status === "all"){
+        displayIssues(allIssuesData);
+    } else{
+        const filterIssue = allIssuesData.filter((issues) => issues.status === status );
+        displayIssues(filterIssue);
+    };
+};
 
 
 

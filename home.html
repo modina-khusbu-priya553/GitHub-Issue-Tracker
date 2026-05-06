@@ -59,9 +59,9 @@
         <!-- tab section -->
         <section class="bg-white w-4/5 mx-auto m-15">
             <div class="flex justify-start py-6 gap-2 px-6 shadow-[0_1px_6px_rgba(0,0,0,0.08)] rounded-lg">
-                <button class="btn btn-primary">All</button>
-                <button class="btn btn-primary">Open</button>
-                <button class="btn btn-primary">Close</button>
+                <button id="btn-all" onclick="filterIssues('all')" class="btn active py-4 px-9">All</button>
+                <button id="btn-open" onclick="filterIssues('open')" class="btn py-4 px-9">Open</button>
+                <button id="btn-closed" onclick="filterIssues('closed')" class="btn py-4 px-9">Close</button>
 
             </div>
 
