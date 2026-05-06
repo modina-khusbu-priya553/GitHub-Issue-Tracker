@@ -1,7 +1,7 @@
 // function for labels
 const loadLabels = (labels) =>{
 
-    // object for all colors
+    // object for label colors
     const labelColors = {
         "bug": {
             bg: "bg-[#FEECEC]",
@@ -32,8 +32,10 @@ const loadLabels = (labels) =>{
     const result = labels.map((label) => {
     const config = labelColors[label];
 
-    // config না পেলে skip করবে
-    if(!config) return "";
+    // skip the config if no data find
+    if(!config){
+        return "";
+    } 
 
     const div = `
         <div class='flex items-center ${config.bg} w-fit py-1 px-2 border-2 ${config.border} rounded-full gap-1 justify-center'>
@@ -43,13 +45,32 @@ const loadLabels = (labels) =>{
     `;
     return div;
     });
-    const finalResult = result.join("");
-    return finalResult;
+    return result.join(" ");   
     
 };
+
+//  priority color change object
+
+const priorityColors = {
+    "high": "bg-[#FEECEC] text-[#EF4444] border-[rgb(245,202,202)]",
+    "medium": "bg-[#FFF8DB] text-[#D97706] border-[rgb(253,238,138)]",
+    "low": "bg-[#EEEFF2] text-[#9CA3AF] border-gray-300",
+};
+
+// status color
+
+const statusColor = {
+    "open": "border-t-4 border-[#00A96E]",
+    "closed": "border-t-4 border-[#A855F7]"
+};
+
+// status img
+
+const statusImg = {
+    "open": "./assets/Open-Status.png",
+    "closed": "./assets/Closed.png"
+}
     
-    // `<span class="badge bg-sky-100 p-4">${element}</span>`);
-    // return status.join(" ");
 
 
 // fetch all issue data
@@ -73,13 +94,13 @@ const displayIssues = (issues) => {
     issues.forEach ((issue) =>{
         const card = document.createElement("div");
         card.innerHTML = `
-        <div class="space-y-3 bg-white rounded-lg shadow-md p-4 h-full flex flex-col justify-between">
+        <div class="space-y-3 bg-white rounded-lg shadow-md p-4 h-full flex flex-col justify-between ${statusColor[issue.status]}">
                 <div class="flex justify-between items-center">
-                    <img src="./assets/Open-Status.png">
+                    <img src="${statusImg[issue.status]}">
 
                     <div>
-                        <h3 class="bg-[#FEECEC] w-fit border-2 border-[rgb(245,202,202)] px-6 py-1 rounded-full"> 
-                        <span class="text-[#EF4444]">${issue.priority}</span></h3>
+                        <h3 class="w-fit border-2 px-6 py-1 rounded-full ${priorityColors[issue.priority]}"> 
+                        <span class="text-xs">${issue.priority}</span></h3>
                     </div>
                 </div>
 
@@ -95,8 +116,8 @@ const displayIssues = (issues) => {
 
                 <hr class="my-2 border-gray-300">
                 <div class="px-4">
-                    <p class="text-[#64748B]">#1 by john_doe</p>
-                    <p class="text-[#64748B]">1/15/2024</p>
+                    <p class="text-[#64748B] text-xs">#1 by john_doe</p>
+                    <p class="text-[#64748B] text-xs">1/15/2024</p>
                 </div>
 
                 </div>
