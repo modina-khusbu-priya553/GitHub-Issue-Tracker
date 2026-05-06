@@ -24,11 +24,55 @@
     <link rel="stylesheet" href="./style.css">
 </head>
 
-<body>
-    <h1>
-        Hi 
-    </h1>
+<body class="bg-[#F8FAFC] h-svh">
 
+    <header>
+        <div class="bg-white flex justify-between items-center px-20 py-4 border-b border-[rgb(233,233,233)]">
+            <div class="flex gap-1 items-center justify-center">
+                <div><img src="./assets/nav-logo.png"></div>
+                <h2 class="text-2xl font-semibold">GitHub Issues Tracker</h2>
+            </div>
+
+            <div class="flex items-center justify-center gap-3">
+                <label class="input">
+                <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <g
+                    stroke-linejoin="round"
+                    stroke-linecap="round"
+                    stroke-width="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                    >
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.3-4.3"></path>
+                    </g>
+                </svg>
+                <input type="search" required placeholder="Search" />
+                </label>
+                <button class="btn btn-primary">Search</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+
+        <!-- tab section -->
+        <section class="bg-white w-4/5 mx-auto m-15">
+            <div class="flex justify-start py-6 gap-2 px-6 shadow-[0_1px_6px_rgba(0,0,0,0.08)] rounded-lg">
+                <button class="btn btn-primary">All</button>
+                <button class="btn btn-primary">Open</button>
+                <button class="btn btn-primary">Close</button>
+
+            </div>
+
+
+        </section>
+
+        <!-- issue section -->
+    </main>
+
+    <script src="./script.js"></script>
+    
 
 </body>
 </html>
