@@ -1,3 +1,6 @@
+
+const searchBtn = document.getElementById("searchBtn");
+
 // function for labels
 const loadLabels = (labels) =>{
 
@@ -74,7 +77,6 @@ const statusImg = {
 
 // function for remove active
 const removeActive = () => {
-
     document.getElementById("btn-all").classList.remove("active");
     document.getElementById("btn-open").classList.remove("active");
     document.getElementById("btn-closed").classList.remove("active");   
@@ -99,6 +101,10 @@ const allIssues = () => {
 
 // display all issues
 const displayIssues = (issues) => {
+
+    const issueCount = document.getElementById("issue-count");
+
+    issueCount.innerText = `${issues.length} issues`;
 
     const issuesContainer = document.getElementById("issue-container");
     issuesContainer.innerHTML="";
@@ -147,8 +153,8 @@ const filterIssues = (status) => {
 
     removeActive();
     const buttons = document.getElementById(`btn-${status}`)
-
     buttons.classList.add("active");
+    
     if(status === "all"){
         displayIssues(allIssuesData);
     } else{
@@ -156,6 +162,22 @@ const filterIssues = (status) => {
         displayIssues(filterIssue);
     };
 };
+
+// fetch data for search
+
+const searchHandle = (searchValue) => {
+    fetch(`https://phi-lab-server.vercel.app/api/v1/lab/issues/search?q=${searchValue}`)
+    .then((respond) => respond.json())
+    .then ((data) =>{
+        displayIssues(data.data);
+    });
+};
+
+searchBtn.addEventListener("click", () =>{
+
+    const searchInput = document.getElementById("searchInput").value;
+    searchHandle(searchInput);
+});
 
 
 
