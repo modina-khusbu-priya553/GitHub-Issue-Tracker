@@ -112,7 +112,8 @@ const displayIssues = (issues) => {
     issues.forEach ((issue) =>{
         const card = document.createElement("div");
         card.innerHTML = `
-        <div class="space-y-3 bg-white rounded-lg shadow-md p-4 h-full flex flex-col justify-between ${statusColor[issue.status]}">
+        <div onclick="loadIssueDetails(${issue.id})" class="space-y-3 bg-white rounded-lg shadow-md p-4 h-full flex flex-col 
+        justify-between ${statusColor[issue.status]}">
                 <div class="flex justify-between items-center">
                     <img src="${statusImg[issue.status]}">
 
@@ -133,9 +134,9 @@ const displayIssues = (issues) => {
                 </div>
 
                 <hr class="my-2 border-gray-300">
-                <div class="px-4">
-                    <p class="text-[#64748B] text-xs">#1 by john_doe</p>
-                    <p class="text-[#64748B] text-xs">1/15/2024</p>
+                <div class="px-4 space-y-1">
+                    <p class="text-[#64748B] text-xs">${issue.author}</p>
+                    <p class="text-[#64748B] text-xs">${new Date(issue.createdAt).toLocaleDateString()}</p>
                 </div>
 
                 </div>
@@ -179,6 +180,61 @@ searchBtn.addEventListener("click", () =>{
     searchHandle(searchInput);
 });
 
+// fetch single issue data
+const loadIssueDetails = async (id) => {
+    const url = `https://phi-lab-server.vercel.app/api/v1/lab/issue/${id}`;
+    const response = await fetch(url);
+    const details = await response.json();
+    
+    displayIssuesDetails(details.data);
+};
+  
+// display Issue details in the UI
+const displayIssuesDetails = (details) => {
+
+    const detailsContainer = document.getElementById("details-container");
+    detailsContainer.innerHTML = `
+    <div class="py-4 px-3 flex flex-col gap-4">
+        <div class="flex flex-col gap-3">
+            <h2 class="font-semibold text-2xl">${details.title}</h2>
+            <div class="flex gap-2 items-center">
+                    <h3 class="text-white px-2 py-1 rounded-full ${details.status === 'open' ? 'bg-[#00A96E]' 
+                        :'bg-[#A855F7]'}">${details.status}</h3>      
+                    <ul class="flex text-xs text-[#64748B] gap-2 justify-center items-center">
+                        <li>
+                            ${details.author}
+                        </li>
+                        <li>
+                            ${new Date(details.createdAt).toLocaleDateString()}
+                        </li>
+                    </ul>
+            </div>
+        </div>
+        <div class="flex items-center gap-1 justify-start">
+            ${loadLabels(details.labels)}
+        </div>
+            
+        <p class="text-[#64748B] text-xs">${details.description}</p> 
+
+        <div class="flex bg-[#F8FAFC] p-4 gap-10 justify-start">
+            <div class="space-y-2">
+                <h3 class="text-[#64748B] text-sm">Assignee:</h3>
+                <h3 class="font-semibold">${details.author}</h3>
+            </div>
+            <div class="space-y-2">
+                <p class="text-[#64748B] text-sm">Priority:</p>
+                <h3 class="border-2 px-3 py-1 rounded-full ${priorityColors[details.priority]}"> 
+                <span class="text-xs">${details.priority}</span></h3>
+            </div>             
+        </div>
+
+    </div>
+    
+    `;
+
+    document.getElementById("word_modal").showModal();
+
+};
 
 
 allIssues();
