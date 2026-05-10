@@ -1,5 +1,7 @@
 
 const searchBtn = document.getElementById("searchBtn");
+const loading = document.getElementById("loading");
+
 
 // function for labels
 const loadLabels = (labels) =>{
@@ -74,7 +76,6 @@ const statusImg = {
     "closed": "./assets/Closed.png"
 }
 
-
 // function for remove active
 const removeActive = () => {
     document.getElementById("btn-all").classList.remove("active");
@@ -88,6 +89,10 @@ let allIssuesData = [];
 
 const allIssues = () => {
 
+    loading.style.display = "flex";
+  
+
+    
     const url="https://phi-lab-server.vercel.app/api/v1/lab/issues";
 
     fetch(url)
@@ -95,6 +100,9 @@ const allIssues = () => {
     .then((data) => {
         allIssuesData = data.data;
         displayIssues(allIssuesData);
+        
+        loading.style.display = "none";
+       
     });
 
 };
@@ -141,17 +149,17 @@ const displayIssues = (issues) => {
 
                 </div>
         `
-
+        
         issuesContainer.appendChild(card);
-
-    })
+        // manageLoading(false);
+    });
+    
         
 }; 
 
 // display issues by status
 
 const filterIssues = (status) => {
-
     removeActive();
     const buttons = document.getElementById(`btn-${status}`)
     buttons.classList.add("active");
@@ -162,6 +170,7 @@ const filterIssues = (status) => {
         const filterIssue = allIssuesData.filter((issues) => issues.status === status );
         displayIssues(filterIssue);
     };
+    
 };
 
 // fetch data for search

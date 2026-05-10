@@ -27,13 +27,13 @@
 <body class="bg-[#F8FAFC] h-svh">
 
     <header>
-        <div class="bg-white flex justify-between items-center px-20 py-4 border-b border-[rgb(233,233,233)]">
-            <div class="flex gap-1 items-center justify-center">
+        <div class="bg-white flex md:justify-between justify-start items-center px-4 md:px-20 py-4 border-b border-[rgb(233,233,233)]">
+            <div class="flex flex-col gap-1 md:items-center  md:flex-row md:w-full  w-4/5">
                 <div><img src="./assets/nav-logo.png"></div>
-                <h2 class="text-2xl font-semibold">GitHub Issues Tracker</h2>
+                <h2 class="md:text-2xl font-semibold">GitHub Issues Tracker</h2>
             </div>
 
-            <div class="flex items-center justify-center gap-3">
+            <div class="flex items-center justify-center md:gap-3 gap-1">
                 <label class="input">
                 <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                     <g
@@ -58,10 +58,10 @@
 
         <!-- tab section -->
         <section class="bg-white w-4/5 mx-auto m-15">
-            <div class="flex justify-start py-6 gap-2 px-6 shadow-[0_1px_6px_rgba(0,0,0,0.08)] rounded-lg">
-                <button id="btn-all" onclick="filterIssues('all')" class="btn active py-4 px-9">All</button>
-                <button id="btn-open" onclick="filterIssues('open')" class="btn py-4 px-9">Open</button>
-                <button id="btn-closed" onclick="filterIssues('closed')" class="btn py-4 px-9">Close</button>
+            <div class="flex justify-center items-center md:justify-start py-6 gap-2 md:px-6 px-3 shadow-[0_1px_6px_rgba(0,0,0,0.08)] rounded-lg">
+                <button id="btn-all" onclick="filterIssues('all')" class="btn active py-4 md:px-9 px-8">All</button>
+                <button id="btn-open" onclick="filterIssues('open')" class="btn py-4 md:px-9 px-8">Open</button>
+                <button id="btn-closed" onclick="filterIssues('closed')" class="btn py-4 md:px-9 px-8">Close</button>
 
             </div>
 
@@ -74,39 +74,43 @@
 
             <!-- issues -->
 
-            <div class="bg-white flex items-center justify-between p-6 border-b border-[rgb(228,228,231)]">
+            <div class="bg-white flex md:flex-row flex-col md:items-center md:justify-between justify-start items-start p-6 border-b border-[rgb(228,228,231)] gap-2">
 
-                <div class="flex items-center justify-center gap-2">
-                    <div class="bg-[#ECE4FF] rounded-full w-12 p-3">
+                <div class="flex md:items-center md:justify-center justify-start items-start gap-2">
+                    <div class="bg-[#ECE4FF] rounded-full w-10 md:w-fit p-3">
                         <img src="./assets/Aperture.png" alt="">
                     </div>
                     <div>
-                        <h2  id="issue-count" class="font-semibold text-xl">0</h2>
-                        <p class="text-[#64748B]">Track and manage your project issues</p>
+                        <h2  id="issue-count" class="font-semibold md:text-xl">0</h2>
+                        <p class="text-[#64748B] text-xs md:text-sm">Track and manage your project issues</p>
                     </div>
                 </div>
 
                 <div class="flex items-center justify-center gap-4">
-                    <span class="font-medium"><i class="fa-solid fa-circle text-[#00A96E]"></i>Open</span>
+                    <span class="font-medium text-xs md:text-[sm]"><i class="fa-solid fa-circle text-[#00A96E]"></i>Open</span>
 
-                    <span class="font-medium"><i class="fa-solid fa-circle text-[#A855F7]"></i>Close</span>
+                    <span class="font-medium text-xs md:text-[sm]"><i class="fa-solid fa-circle text-[#A855F7]"></i>Close</span>
                 </div>
+            </div>
+
+            <!-- loading section -->
+            <div id="loading" class="flex items-center justify-center py-10 gap-1">
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+            <span class="loading loading-spinner loading-lg text-primary"></span>
+            <span class="loading loading-spinner loading-lg text-primary"></span>
             </div>
 
             <!-- issue card container-->
 
-            <div id="issue-container" class="grid grid-cols-4 gap-4 m-6">
-
-                
-
-            </div>
-
-            
+            <div id="issue-container" class="grid lg:grid-cols-4 md:grid-cols-2 gap-4 m-6">               
+            </div>            
         </section>
 
+       
+
             <!-- Open the modal using ID.showModal() method -->
-<!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-    <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
+            <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
+         <dialog id="word_modal" class="modal modal-bottom sm:modal-middle">
     <div class="modal-box">
         <div id="details-container">
             
@@ -119,7 +123,8 @@
         </form>
         </div>
     </div>
-    </dialog>
+        </dialog>
+
     </main>
 
     
