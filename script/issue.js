@@ -136,7 +136,7 @@ const displayIssues = (issues) => {
                         <h2 class="font-semibold text-sm">${issue.title}</h2>
                         <p class="text-[#64748B] text-xs">${issue.description}</p>
                     </div>
-                    <div class="flex items-center gap-1 justify-start">
+                    <div class="flex items-center gap-1 text-sm justify-start">
                         ${loadLabels(issue.labels)}
                     </div>
                 </div>
